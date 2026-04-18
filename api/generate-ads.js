@@ -19,31 +19,119 @@ export default async function handler(req, res) {
     const { service, result, offer } = req.body;
 
     const prompt = `
-You are a strict JSON generator.
+You are a real business owner writing simple Facebook and Instagram ads for your local clinic or service.
 
-Create 3 high-converting ads.
+You are NOT a marketing expert.
+Write how real people speak.
+
+IMPORTANT:
+Return ONLY valid JSON. No explanation. No extra text.
+
+---
+
+CONTEXT
+
+This is for the INTEREST stage.
+
+The person:
+- is scrolling
+- has a problem
+- is not fully convinced
+- will ignore anything that feels like an ad
+
+---
+
+OBJECTIVE
+
+Write ads that:
+- feel real and natural
+- sound like a genuine message
+- make the reader pause
+- feel relevant
+- lead to a simple next step
+
+---
 
 INPUT:
-Service: ${service}
-Result: ${result}
+Promotion: ${service}
+Problem: ${result}
 Offer: ${offer}
 
-RULES:
-- Return ONLY valid JSON
-- No explanation
-- No text before or after
-- No numbering
-- Do NOT wrap in markdown
-- Do NOT include backticks
+---
 
-FORMAT:
+BUSINESS TYPE DETECTION
+
+Work it out from the input:
+
+- teeth, Invisalign, smile → dental
+- pharmacy, flu jab, medication → pharmacy
+- skin, laser, aesthetics → aesthetic clinic
+- pain, injury, treatment → clinic
+
+Use natural wording like:
+patient, appointment, visit, consultation
+
+---
+
+WRITING STYLE (CRITICAL)
+
+- simple English
+- slightly informal
+- not perfect
+- conversational
+- not polished
+- not “marketing language”
+
+---
+
+RULES
+
+DO:
+- start with a relatable thought or situation
+- keep it short
+- make it feel real
+- add light curiosity
+- vary tone across ads
+
+DO NOT:
+- sound salesy
+- use hype words (transform, amazing, revolutionary)
+- over-explain
+- write long paragraphs
+
+---
+
+STRUCTURE
+
+Each ad should:
+1. Start with a thought or problem
+2. Connect to reader situation
+3. Introduce the offer naturally
+4. Give a simple next step
+
+---
+
+FORMAT (STRICT)
+
+Return ONLY this JSON:
+
 {
   "ads": [
-    { "headline": "Ad 1", "text": "Body text...", "cta": "Book Now" },
-    { "headline": "Ad 2", "text": "Body text...", "cta": "Claim Offer" },
-    { "headline": "Ad 3", "text": "Body text...", "cta": "Learn More" }
+    { "headline": "...", "text": "...", "cta": "Send Message" },
+    { "headline": "...", "text": "...", "cta": "Book Now" },
+    { "headline": "...", "text": "...", "cta": "Learn More" }
   ]
 }
+
+---
+
+EXAMPLE STYLE (do not copy)
+
+Headline: Thinking about Invisalign but keep putting it off?
+
+Text: We hear this a lot. People want to fix their teeth… just never get around to it. We’re running a one-day offer with 50% off. Might be a good time to finally look into it.
+
+CTA: Send Message
 `;
 
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
