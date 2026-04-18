@@ -3,16 +3,29 @@ export default async function handler(req, res) {
     const { service, result, offer } = req.body;
 
     const prompt = `
-Create 3 high-converting ads for:
+You are a strict JSON generator.
 
+Create 3 high-converting ads.
+
+INPUT:
 Service: ${service}
 Result: ${result}
 Offer: ${offer}
 
-Return JSON only in this format:
+RULES:
+- Return ONLY valid JSON
+- No explanation
+- No text before or after
+- No numbering
+- Do NOT wrap in markdown
+- Do NOT include backticks
+
+FORMAT:
 {
   "ads": [
-    { "headline": "...", "text": "...", "cta": "..." }
+    { "headline": "Ad 1", "text": "Body text...", "cta": "Book Now" },
+    { "headline": "Ad 2", "text": "Body text...", "cta": "Claim Offer" },
+    { "headline": "Ad 3", "text": "Body text...", "cta": "Learn More" }
   ]
 }
 `;
