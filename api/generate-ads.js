@@ -1,4 +1,20 @@
 export default async function handler(req, res) {
+
+  const allowedOrigin = "*";
+
+  // ✅ Handle preflight (CORS fix)
+  if (req.method === "OPTIONS") {
+    res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    return res.status(200).end();
+  }
+
+  // ✅ Add headers to all responses
+  res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
   try {
     const { service, result, offer } = req.body;
 
@@ -51,9 +67,9 @@ FORMAT:
       output = { ads: [] };
     }
 
-    res.status(200).json(output);
+    return res.status(200).json(output);
 
   } catch (error) {
-    res.status(500).json({ error: "Error generating ads" });
+    return res.status(500).json({ error: "Error generating ads" });
   }
 }
