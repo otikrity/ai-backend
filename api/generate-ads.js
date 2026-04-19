@@ -16,7 +16,8 @@ export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   try {
-    const { service, result, offer } = req.body;
+    // ✅ FIXED: include audience + angle
+    const { service, result, offer, audience, angle } = req.body;
 
     const prompt = `
 You are a real business owner writing simple Facebook and Instagram ads for a local service business.
@@ -66,36 +67,35 @@ Write ads that:
 
 ---
 
-AUDIENCE UNDERSTANDING (IMPORTANT)
+AUDIENCE UNDERSTANDING
 
-Adjust wording based on audience:
-- If business owners → use "clients", "enquiries", "leads"
-- If local customers → use "appointments", "visit", "book in"
-- If unsure → keep language simple and neutral
-
----
-
-TONE CONTROL (IMPORTANT)
-
-Use the Tone Angle to guide the hook:
-
-- Curiosity → make them think “what do you mean?”
-- Problem → highlight frustration clearly
-- Direct → straight to outcome
-- Personal → feels like a message, not an ad
-
-Vary tone across the 3 ads.
+- Business owners → use "clients", "enquiries", "leads"
+- Local customers → use "appointments", "book in", "visit"
+- If unsure → keep language simple
 
 ---
 
-WRITING STYLE (CRITICAL)
+TONE CONTROL
+
+Use the Tone Angle:
+
+- Curiosity → make them think
+- Problem → highlight frustration
+- Direct → clear outcome
+- Personal → message style
+
+Vary tone across ads.
+
+---
+
+WRITING STYLE
 
 - simple English
-- slightly informal
 - short sentences
-- not polished
+- slightly informal
+- human
 - no jargon
-- no hype words
+- no hype
 
 DO NOT sound like marketing.
 
@@ -104,53 +104,100 @@ DO NOT sound like marketing.
 RULES
 
 DO:
-- start with a relatable thought or situation
+- start with a relatable thought
 - keep it short
-- feel human
-- create relevance quickly
+- feel natural
 
 DO NOT:
-- say “we are the best”
+- be salesy
 - over-explain
 - use buzzwords
-- write long paragraphs
 
 ---
 
 STRUCTURE
 
-Each ad should:
-1. Start with a thought, problem, or observation
-2. Relate to the reader
-3. Introduce the offer naturally
-4. Give a simple next step
+Each ad:
+1. Thought / problem
+2. Relate to reader
+3. Introduce offer naturally
+4. Simple next step
 
 ---
 
 CTA RULE
 
-This is Stage 1 → Stage 2
+Stage 1 → Stage 2
 
-Use light, non-pushy CTAs like:
+Use:
 - "Send Message"
 - "Learn More"
 - "See More"
 
-DO NOT use aggressive CTAs like:
-- Buy now
-- Sign up now
+---
+
+EMAIL & DM CONTEXT
+
+These are for leads from the ad.
+
+They:
+- showed interest
+- are not fully convinced
+
+OBJECTIVE:
+- feel personal
+- not salesy
+- continue conversation
+
+STYLE:
+- short
+- simple
+- human
+
+DO NOT:
+- be pushy
+- sound like marketing
+
+---
+
+EMAIL STRUCTURE
+
+Each email:
+1. Subject
+2. Short message
+3. Reference problem
+4. Light offer
+5. Simple next step
+
+---
+
+DM STRUCTURE
+
+Each DM:
+1. Personal tone
+2. Reference situation
+3. 1–3 lines
+4. Invite reply
 
 ---
 
 FORMAT (STRICT)
 
-Return ONLY this JSON:
+Return ONLY:
 
 {
   "ads": [
     { "headline": "...", "text": "...", "cta": "Send Message" },
     { "headline": "...", "text": "...", "cta": "Learn More" },
     { "headline": "...", "text": "...", "cta": "See More" }
+  ],
+  "emails": [
+    { "subject": "...", "body": "..." },
+    { "subject": "...", "body": "..." }
+  ],
+  "dms": [
+    { "message": "..." },
+    { "message": "..." }
   ]
 }
 
@@ -158,9 +205,9 @@ Return ONLY this JSON:
 
 EXAMPLE STYLE (do not copy)
 
-Headline: Getting enquiries but still not enough clients?
+Headline: Getting enquiries but not enough clients?
 
-Text: We see this a lot. Businesses are getting interest… but it doesn’t always turn into actual bookings. Usually there’s something simple missing. Might be worth looking at.
+Text: We see this a lot. Businesses get interest but it doesn’t always turn into bookings. Usually something simple is missing. Might be worth looking at.
 
 CTA: Send Message
 `;
@@ -168,7 +215,7 @@ CTA: Send Message
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "Authorization": \`Bearer \${process.env.OPENROUTER_API_KEY}\`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -183,7 +230,8 @@ CTA: Send Message
     try {
       output = JSON.parse(data.choices[0].message.content);
     } catch {
-      output = { ads: [] };
+      // ✅ FIXED fallback
+      output = { ads: [], emails: [], dms: [] };
     }
 
     return res.status(200).json(output);
