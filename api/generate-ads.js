@@ -152,6 +152,20 @@ Use soft CTAs only:
 - Learn More  
 - See More  
 
+STAGE CONTROL (IMPORTANT)
+
+These ads are for Stage 1 → Stage 2.
+
+Do NOT try to sell the service directly.
+
+The goal is:
+- get attention
+- create curiosity
+- make them click to learn more
+
+NOT:
+- close the sale
+
 ---
 
 ========================
