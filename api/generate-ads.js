@@ -183,6 +183,8 @@ Each DM:
 
 ---
 
+---
+
 CHANNEL LOGIC
 
 If Channel = "meta":
@@ -192,7 +194,8 @@ If Channel = "google":
 - Generate Google Search Ads
 - Output 5–10 headlines (short, keyword-based)
 - Output 3–4 descriptions (clear, direct)
-- Headlines must be simple and match intent
+- Headlines must match intent (what people search)
+- Include location or service keywords where possible
 - Use strong CTA like "Book Now", "Get Quote", "Call Now"
 
 If Channel = "landing":
@@ -201,75 +204,111 @@ If Channel = "landing":
 - The goal is to turn visitors into enquiries or bookings
 
 Follow this structure EXACTLY:
+(HERO → PROBLEM → SOLUTION → HOW IT WORKS → WHAT THEY GET → TRUST → CTA)
 
-1. HERO SECTION
-- Clear headline (what the service is)
-- Subheadline (who it’s for + result)
-- One strong CTA (use Primary CTA)
+IMPORTANT:
+- ONE primary CTA only
+- Simple, clear, no fluff
 
-2. PROBLEM SECTION
-- Describe the real situation
-- Keep it simple and relatable
-
-3. SOLUTION SECTION
-- Explain service in plain English
-- Focus on outcome
-
-4. HOW IT WORKS (3 steps)
-- Step 1: Action
-- Step 2: What happens
-- Step 3: Result
-
-5. WHAT THEY GET
-- Bullet points
-- Tangible outcomes
-
-6. TRUST SECTION
-- Testimonials placeholders
-- Reassurance
-
-7. FINAL CTA SECTION
-- Repeat same CTA
-- Remove hesitation
-
-IMPORTANT RULES:
-- Use simple English
-- Short sentences
-- No jargon or hype
-- ONLY ONE primary CTA across the page
-- Keep layout clean and easy to scan
-
-Do NOT:
-- Over-design
-- Add multiple CTAs
-- Use generic filler text
+---
 
 If Channel = "email":
 - Generate emails for an existing customer/patient database
-- These people already know the business (not cold leads)
+- These people already know the business
 
-Generate TWO options:
+Generate:
+1. Single email
+2. 3–5 email sequence
 
-1. Single Email:
-- One clear email for immediate send
-- Focus on problem + offer + simple CTA
-
-2. Email Sequence (3–5 emails):
-- Email 1: Awareness (problem)
-- Email 2: Insight (what’s going wrong)
-- Email 3: Offer (introduce service)
-- Email 4: Reminder
-- Email 5: Final nudge
-
-STYLE:
+Keep:
 - personal
-- conversational
+- simple
 - not salesy
-- simple English
-- short paragraphs
+- clear CTA
 
-CTA:
-- Use ONE consistent CTA across all emails
+---
+
+If Channel = "profile":
+
+- Generate a high-converting social media profile (this is their "mini website")
+
+OBJECTIVE:
+When someone lands on the profile, they should:
+- understand what the business does in seconds
+- trust it
+- know what to do next
+
+Generate:
+
+1. Bio (4 lines max):
+- Line 1: What you do
+- Line 2: Who you help
+- Line 3: Why trust you (proof or outcome)
+- Line 4: Clear CTA (DM us / click link)
+
+2. Profile Checklist:
+- Profile photo (logo or clear image)
+- Location included
+- Booking/contact link added
+
+3. Highlights:
+- Services (what you offer)
+- Results (before/after, outcomes)
+- Reviews (social proof)
+
+IMPORTANT:
+- Clear, not clever
+- No jargon
+- No fluff
+
+---
+
+If Channel = "content":
+
+- Generate 3–5 high-quality social media posts
+
+OBJECTIVE:
+- Build trust (Stage 1)
+- Make people click profile (Stage 2)
+- Push to DM or link (Stage 3)
+
+POST TYPES (MANDATORY MIX):
+
+1. Problem Post:
+- Call out a real situation
+- Make reader feel understood
+
+2. Proof Post:
+- Show real result, outcome, or scenario
+- Make it believable, not hype
+
+3. Offer Post:
+- Softly introduce service
+- Show how to take next step
+
+4. Optional Tip Post:
+- Simple, useful insight
+
+WRITING RULES:
+- Short
+- Conversational
+- Real, not polished
+- No buzzwords
+- No generic advice
+
+CRITICAL:
+Each post must end with:
+- "DM us"
+OR
+- "Link in bio"
+
+Make posts feel like they came from a real business, not a marketer.
+
+Also generate:
+
+Ask AI Prompt (optional):
+- A copy-paste prompt that can be used in GHL to create variations or styled posts
+- This is optional, not the main output
 
 ---
 
