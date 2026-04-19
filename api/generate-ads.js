@@ -17,8 +17,8 @@ export default async function handler(req, res) {
 
   try {
     // ✅ FIXED: include audience + angle
-    const { service, result, offer, audience, angle } = req.body;
-
+const { service, result, offer, audience, angle, channel, cta } = req.body;
+    
     const prompt = `
 You are a real business owner writing simple Facebook and Instagram ads for a local service business.
 
@@ -53,6 +53,8 @@ Problem: ${result}
 Offer: ${offer}
 Target Audience: ${audience}
 Tone Angle: ${angle}
+Channel: ${channel}
+Primary CTA: ${cta}
 
 ---
 
@@ -181,22 +183,46 @@ Each DM:
 
 ---
 
+CHANNEL LOGIC
+
+If Channel = "meta":
+- Generate Facebook/Instagram ads (as defined above)
+
+If Channel = "google":
+- Generate Google Search Ads
+- Output 5–10 headlines (short, keyword-based)
+- Output 3–4 descriptions (clear, direct)
+- Headlines must be simple and match intent
+- Use strong CTA like "Book Now", "Get Quote", "Call Now"
+
+If Channel = "landing":
+- Generate landing page copy only (no ads)
+- Follow a high-converting structure:
+  Hero, Problem, Solution, How It Works (3 steps), What They Get, Trust, CTA
+- Use ONLY ONE primary CTA across the page
+- Keep language simple and direct
+
+---
+
 FORMAT (STRICT)
 
 Return ONLY:
 
 {
   "ads": [
-    { "headline": "...", "text": "...", "cta": "Send Message" },
-    { "headline": "...", "text": "...", "cta": "Learn More" },
-    { "headline": "...", "text": "...", "cta": "See More" }
+    { "headline": "...", "text": "...", "cta": "Send Message" }
   ],
+  "google": {
+    "headlines": ["...", "..."],
+    "descriptions": ["...", "..."]
+  },
+  "landing": {
+    "copy": "..."
+  },
   "emails": [
-    { "subject": "...", "body": "..." },
     { "subject": "...", "body": "..." }
   ],
   "dms": [
-    { "message": "..." },
     { "message": "..." }
   ]
 }
