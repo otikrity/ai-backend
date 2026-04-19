@@ -328,12 +328,21 @@ Return ONLY:
     "copy": "..."
   },
   "emails": {
-  "single": { "subject": "...", "body": "..." },
-  "sequence": [
-    { "subject": "...", "body": "..." },
-    { "subject": "...", "body": "..." }
-  ]
-},
+    "single": { "subject": "...", "body": "..." },
+    "sequence": [
+      { "subject": "...", "body": "..." },
+      { "subject": "...", "body": "..." }
+    ]
+  },
+  "profile": {
+    "bio": "...",
+    "checklist": ["...", "..."],
+    "highlights": ["...", "..."]
+  },
+  "content": {
+    "posts": ["...", "..."],
+    "ask_ai_prompt": "..."
+  },
   "dms": [
     { "message": "..." }
   ]
