@@ -2,7 +2,6 @@ export default async function handler(req, res) {
 
   const allowedOrigin = "*";
 
-  // ✅ Handle preflight (CORS fix)
   if (req.method === "OPTIONS") {
     res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
     res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -10,17 +9,16 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  // ✅ Add headers to all responses
   res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   try {
-    // ✅ FIXED: include audience + angle
-const { service, result, offer, audience, angle, channel, cta } = req.body;
-    
+
+    const { service, result, offer, audience, angle, channel, cta } = req.body;
+
     const prompt = `
-You are a real business owner writing simple Facebook and Instagram ads for a local service business.
+You are a real business owner writing marketing content for a local service business.
 
 You are NOT a marketer.
 Write like a normal person speaking honestly.
@@ -32,17 +30,14 @@ Return ONLY valid JSON. No explanation. No extra text.
 
 CONTEXT
 
-This is for the INTEREST stage.
-
-The person:
-- is scrolling
-- has a problem
-- is not fully convinced
-- will ignore anything that feels like an ad
+This is for people who:
+- have a problem
+- are not fully convinced
+- will ignore anything that feels like marketing
 
 Your job:
-Make them pause and think:
-"This might help me"
+Make them feel:
+"This is relevant to me"
 
 ---
 
@@ -58,70 +53,92 @@ Primary CTA: ${cta}
 
 ---
 
-OBJECTIVE
+CORE RULES (APPLIES TO ALL OUTPUTS)
 
-Write ads that:
-- feel real and natural
-- sound like something a business owner would say
-- are relevant to the audience
-- focus on the problem or desired outcome
-- lead to a simple next step (Stage 2 - check us out)
+- simple English
+- short sentences
+- natural tone
+- slightly informal
+- no jargon
+- no hype
+- no “marketing language”
+
+DO NOT:
+- sound like an ad
+- over-explain
+- be pushy
 
 ---
 
-AUDIENCE UNDERSTANDING
+AUDIENCE LANGUAGE
 
-- Business owners → use "clients", "enquiries", "leads"
-- Local customers → use "appointments", "book in", "visit"
-- If unsure → keep language simple
+- If audience = business owners → use "clients", "leads", "enquiries"
+- If audience = local customers → use "appointments", "book in", "visit"
+- If unsure → keep neutral language
+
+---
+
+========================
+META ADS (CRITICAL SECTION)
+========================
+
+CREATIVE STRATEGY
+
+Generate 3–5 ads that are CONCEPTUALLY DIFFERENT.
+
+Each ad must represent a different angle:
+
+1. Problem frustration  
+2. Curiosity / question  
+3. Direct outcome  
+4. Personal / story  
+5. Proof / result  
+
+Do NOT rewrite the same idea.
+Each ad must feel like a completely different concept.
 
 ---
 
 TONE CONTROL
 
-Use the Tone Angle:
+Use the Tone Angle to influence the hook:
 
 - Curiosity → make them think
 - Problem → highlight frustration
 - Direct → clear outcome
 - Personal → message style
 
-Vary tone across ads.
+---
+
+SCROLL BEHAVIOUR
+
+Ads must feel like a normal post someone would stop for.
+
+- natural
+- slightly imperfect
+- not polished
+- not corporate
 
 ---
 
-WRITING STYLE
+OPENING LINE RULE
 
-- simple English
-- short sentences
-- slightly informal
-- human
-- no jargon
-- no hype
-
-DO NOT sound like marketing.
-
----
-
-RULES
-
-DO:
-- start with a relatable thought
-- keep it short
-- feel natural
+The first line must:
+- feel like a real thought
+- create curiosity or recognition
+- relate to the reader
 
 DO NOT:
-- be salesy
-- over-explain
-- use buzzwords
+- start with business name
+- start with “We offer”
+- sound like promotion
 
 ---
 
-STRUCTURE
+AD STRUCTURE
 
-Each ad:
-1. Thought / problem
-2. Relate to reader
+1. Hook (thought/problem)
+2. Relate clearly to reader
 3. Introduce offer naturally
 4. Simple next step
 
@@ -129,190 +146,156 @@ Each ad:
 
 CTA RULE
 
-Stage 1 → Stage 2
+Use soft CTAs only:
 
-Use:
-- "Send Message"
-- "Learn More"
-- "See More"
+- Send Message  
+- Learn More  
+- See More  
 
 ---
 
-EMAIL & DM CONTEXT
+========================
+EMAIL & DM (FOLLOW-UP SYSTEM)
+========================
 
-These are for leads from the ad.
-
-They:
-- showed interest
+These are for people who:
+- clicked or showed interest
 - are not fully convinced
 
 OBJECTIVE:
-- feel personal
-- not salesy
 - continue conversation
+- feel personal
+- move them to next step
 
 STYLE:
 - short
 - simple
 - human
-
-DO NOT:
-- be pushy
-- sound like marketing
+- not salesy
 
 ---
 
-EMAIL STRUCTURE
+EMAIL RULES
 
-Each email:
-1. Subject
-2. Short message
+Each email must:
+1. Simple subject
+2. Natural message
 3. Reference problem
-4. Light offer
-5. Simple next step
+4. Light mention of offer
+5. Clear next step
 
 ---
 
-DM STRUCTURE
+DM RULES
 
-Each DM:
-1. Personal tone
-2. Reference situation
-3. 1–3 lines
-4. Invite reply
-
----
+Each message:
+- 1–3 lines
+- conversational
+- references situation
+- invites reply
 
 ---
 
+========================
 CHANNEL LOGIC
+========================
 
 If Channel = "meta":
-- Generate Facebook/Instagram ads (as defined above)
+
+Return:
+- 3–5 ads (different angles)
+
+---
 
 If Channel = "google":
-- Generate Google Search Ads
-- Output 5–10 headlines (short, keyword-based)
-- Output 3–4 descriptions (clear, direct)
-- Headlines must match intent (what people search)
-- Include location or service keywords where possible
-- Use strong CTA like "Book Now", "Get Quote", "Call Now"
+
+Return:
+- 5–10 headlines
+- 3–4 descriptions
+
+Rules:
+- keyword-based
+- match search intent
+- include service + location where possible
+- headlines must reflect what someone would type into Google
+- direct and clear
+
+---
 
 If Channel = "landing":
-- Generate landing page copy only (no ads)
-- This is for Google Ads traffic (high intent)
-- The goal is to turn visitors into enquiries or bookings
 
-Follow this structure EXACTLY:
-(HERO → PROBLEM → SOLUTION → HOW IT WORKS → WHAT THEY GET → TRUST → CTA)
+Generate landing page copy:
 
-IMPORTANT:
-- ONE primary CTA only
-- Simple, clear, no fluff
+Structure:
+
+1. Hero (headline + CTA)
+2. Problem
+3. Solution
+4. How it works (3 steps)
+5. Benefits
+6. Trust
+7. Final CTA
+
+Rules:
+- ONE CTA only
+- clear and simple
+- no fluff
 
 ---
 
 If Channel = "email":
-- Generate emails for an existing customer/patient database
-- These people already know the business
 
 Generate:
-1. Single email
-2. 3–5 email sequence
 
-Keep:
-- personal
-- simple
-- not salesy
-- clear CTA
+1. Single email  
+2. 3–5 email sequence  
 
 ---
 
 If Channel = "profile":
 
-- Generate a high-converting social media profile (this is their "mini website")
-
-OBJECTIVE:
-When someone lands on the profile, they should:
-- understand what the business does in seconds
-- trust it
-- know what to do next
-
 Generate:
 
-1. Bio (4 lines max):
-- Line 1: What you do
-- Line 2: Who you help
-- Line 3: Why trust you (proof or outcome)
-- Line 4: Clear CTA (DM us / click link)
-
-2. Profile Checklist:
-- Profile photo (logo or clear image)
-- Location included
-- Booking/contact link added
-
-3. Highlights:
-- Services (what you offer)
-- Results (before/after, outcomes)
-- Reviews (social proof)
-
-IMPORTANT:
-- Clear, not clever
-- No jargon
-- No fluff
+- Bio (4 lines)
+- Checklist
+- Highlights (services, results, reviews)
 
 ---
 
 If Channel = "content":
 
-- Generate 3–5 high-quality social media posts
+Generate:
+
+- 3–5 posts:
+  - problem
+  - proof
+  - offer
+  - tip (optional)
 
 OBJECTIVE:
 - Build trust (Stage 1)
-- Make people click profile (Stage 2)
-- Push to DM or link (Stage 3)
+- Drive profile visits (Stage 2)
+- Encourage DM or click (Stage 3)
 
-POST TYPES (MANDATORY MIX):
+Rules:
+- natural tone
+- short
+- not polished
+- real-life style
 
-1. Problem Post:
-- Call out a real situation
-- Make reader feel understood
-
-2. Proof Post:
-- Show real result, outcome, or scenario
-- Make it believable, not hype
-
-3. Offer Post:
-- Softly introduce service
-- Show how to take next step
-
-4. Optional Tip Post:
-- Simple, useful insight
-
-WRITING RULES:
-- Short
-- Conversational
-- Real, not polished
-- No buzzwords
-- No generic advice
-
-CRITICAL:
 Each post must end with:
-- "DM us"
+- DM us
 OR
-- "Link in bio"
-
-Make posts feel like they came from a real business, not a marketer.
+- Link in bio
 
 Also generate:
-
-Ask AI Prompt (optional):
-- A copy-paste prompt that can be used in GHL to create variations or styled posts
-- This is optional, not the main output
+- optional Ask AI prompt for variations
 
 ---
 
+========================
 FORMAT (STRICT)
+========================
 
 Return ONLY:
 
@@ -330,7 +313,6 @@ Return ONLY:
   "emails": {
     "single": { "subject": "...", "body": "..." },
     "sequence": [
-      { "subject": "...", "body": "..." },
       { "subject": "...", "body": "..." }
     ]
   },
@@ -347,16 +329,6 @@ Return ONLY:
     { "message": "..." }
   ]
 }
-
----
-
-EXAMPLE STYLE (do not copy)
-
-Headline: Getting enquiries but not enough clients?
-
-Text: We see this a lot. Businesses get interest but it doesn’t always turn into bookings. Usually something simple is missing. Might be worth looking at.
-
-CTA: Send Message
 `;
 
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -377,13 +349,20 @@ CTA: Send Message
     try {
       output = JSON.parse(data.choices[0].message.content);
     } catch {
-      // ✅ FIXED fallback
-      output = { ads: [], emails: [], dms: [] };
+      output = {
+        ads: [],
+        google: { headlines: [], descriptions: [] },
+        landing: { copy: "" },
+        emails: { single: {}, sequence: [] },
+        profile: {},
+        content: {},
+        dms: []
+      };
     }
 
     return res.status(200).json(output);
 
   } catch (error) {
-    return res.status(500).json({ error: "Error generating ads" });
+    return res.status(500).json({ error: "Error generating content" });
   }
 }
