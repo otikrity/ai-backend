@@ -197,10 +197,52 @@ If Channel = "google":
 
 If Channel = "landing":
 - Generate landing page copy only (no ads)
-- Follow a high-converting structure:
-  Hero, Problem, Solution, How It Works (3 steps), What They Get, Trust, CTA
-- Use ONLY ONE primary CTA across the page
-- Keep language simple and direct
+- This is for Google Ads traffic (high intent)
+- The goal is to turn visitors into enquiries or bookings
+
+Follow this structure EXACTLY:
+
+1. HERO SECTION
+- Clear headline (what the service is)
+- Subheadline (who it’s for + result)
+- One strong CTA (use Primary CTA)
+
+2. PROBLEM SECTION
+- Describe the real situation
+- Keep it simple and relatable
+
+3. SOLUTION SECTION
+- Explain service in plain English
+- Focus on outcome
+
+4. HOW IT WORKS (3 steps)
+- Step 1: Action
+- Step 2: What happens
+- Step 3: Result
+
+5. WHAT THEY GET
+- Bullet points
+- Tangible outcomes
+
+6. TRUST SECTION
+- Testimonials placeholders
+- Reassurance
+
+7. FINAL CTA SECTION
+- Repeat same CTA
+- Remove hesitation
+
+IMPORTANT RULES:
+- Use simple English
+- Short sentences
+- No jargon or hype
+- ONLY ONE primary CTA across the page
+- Keep layout clean and easy to scan
+
+Do NOT:
+- Over-design
+- Add multiple CTAs
+- Use generic filler text
 
 ---
 
