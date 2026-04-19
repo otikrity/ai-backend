@@ -244,6 +244,33 @@ Do NOT:
 - Add multiple CTAs
 - Use generic filler text
 
+If Channel = "email":
+- Generate emails for an existing customer/patient database
+- These people already know the business (not cold leads)
+
+Generate TWO options:
+
+1. Single Email:
+- One clear email for immediate send
+- Focus on problem + offer + simple CTA
+
+2. Email Sequence (3–5 emails):
+- Email 1: Awareness (problem)
+- Email 2: Insight (what’s going wrong)
+- Email 3: Offer (introduce service)
+- Email 4: Reminder
+- Email 5: Final nudge
+
+STYLE:
+- personal
+- conversational
+- not salesy
+- simple English
+- short paragraphs
+
+CTA:
+- Use ONE consistent CTA across all emails
+
 ---
 
 FORMAT (STRICT)
@@ -261,9 +288,13 @@ Return ONLY:
   "landing": {
     "copy": "..."
   },
-  "emails": [
+  "emails": {
+  "single": { "subject": "...", "body": "..." },
+  "sequence": [
+    { "subject": "...", "body": "..." },
     { "subject": "...", "body": "..." }
-  ],
+  ]
+},
   "dms": [
     { "message": "..." }
   ]
