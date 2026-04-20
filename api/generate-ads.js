@@ -84,7 +84,7 @@ META ADS (CRITICAL SECTION)
 
 CREATIVE STRATEGY
 
-Generate 3–5 ads that are CONCEPTUALLY DIFFERENT.
+Generate 5 ads that are CONCEPTUALLY DIFFERENT.
 
 Each ad must represent a different angle:
 
@@ -217,7 +217,7 @@ CHANNEL LOGIC
 If Channel = "meta":
 
 Return:
-- 3–5 ads (different angles)
+- 5 ads (different angles)
 
 ---
 
