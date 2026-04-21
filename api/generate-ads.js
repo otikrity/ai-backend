@@ -28,6 +28,36 @@ Return ONLY valid JSON. No explanation. No extra text.
 
 ---
 
+========================
+SYSTEM CONTEXT (IMPORTANT)
+========================
+
+This system follows a structured marketing framework:
+
+1. Interest – get attention (ads, content)
+2. Review – build trust (forms, pages, proof)
+3. Clarity – explain and guide decision (consultation)
+4. Protection – remove risk (pricing, reassurance)
+
+IMPORTANT:
+
+This request is for the INTEREST stage only.
+
+Your job is NOT to sell the service.
+
+Your job is to:
+- get attention
+- create curiosity
+- make them click or enquire
+
+You are moving the user from:
+Interest → Review
+
+NOT:
+Interest → Purchase
+
+-----------
+
 CONTEXT
 
 This is for people who:
